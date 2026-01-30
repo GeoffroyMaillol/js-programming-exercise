@@ -1,0 +1,6 @@
+**/bin
+**/obj
+docs/
+docs/Technical Test - Dev.pdf
+api/UserDataApi/app.db*
+api/UserDataApi/Migrations/*
