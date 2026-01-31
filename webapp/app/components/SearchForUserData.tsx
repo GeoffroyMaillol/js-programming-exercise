@@ -22,8 +22,14 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
   const searchForUsers = async () => {
     setLoading(true);
     try {
-      const searchQuery = "/search?" + searchString;
-      const response = await fetch(apiConfig.apiEndpoint);
+      let fetchURL = apiConfig.apiEndpoint;
+      // If no search entered, return everything
+      if (searchString) {
+        const searchQuery = `/search?query=${encodeURIComponent(searchString)}`;
+        fetchURL += searchQuery;
+      }
+
+      const response = await fetch(fetchURL);
       const data: UserData[] = await response.json();
       onUserDataLoaded(data);
       onError("");
