@@ -41,9 +41,32 @@ public static class UserDataEndpoints
 
     static async Task<IResult> AddUserData(UserData userData, AppDbContext db)
     {
-        db.UserData.Add(userData);
-        await db.SaveChangesAsync();
-        return Results.Created($"/api/users/{userData.Id}", userData);
+        try
+        {
+            db.UserData.Add(userData);
+            await db.SaveChangesAsync();
+            return Results.Created($"/api/users/{userData.Id}", userData);
+        }
+        catch (DbUpdateException ex)
+        {
+            var message = ex.InnerException?.Message ?? ex.Message;
+            if (message.Contains("UNIQUE constraint failed"))
+            {
+                return Results.Conflict(new {
+                    success = false,
+                    message = "A user with the same first and last name or email already exists"
+                });
+            }
+            if (message.Contains("CHECK constraint failed") || message.Contains("NOT NULL constraint failed"))
+            {
+                return Results.BadRequest(new {
+                    success = false,
+                    message = "Required fields are missing"
+                });
+            }
+
+            return Results.Problem("An unexpected database error occurred");
+        }
     }
     
     static async Task<IResult> UpdateUserData(int id, UserData input, AppDbContext db)

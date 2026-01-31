@@ -13,8 +13,8 @@ public class AppDbContext : DbContext
     public DbSet<UserData> UserData => Set<UserData>();
 
     /// <summary>
-    /// Enforce uniqueness of First Name / Last Name pairs.
-    /// Make email unique as well.
+    /// Enforce uniqueness of First Name / Last Name pairs and email.
+    /// Those 3 columns are also required to be non-empty.
     /// </summary>
     /// <param name="modelBuilder">the model builder</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
