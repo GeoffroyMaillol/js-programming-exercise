@@ -4,7 +4,7 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{D82C56D6-B2CD-F611-9E31-04638F7EC30E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserDataApi", "api\UserDataApi\UserDataApi.csproj", "{247D8B5C-1AAD-0F13-B406-C24E9D1F36A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserDataApi", "api\UserDataApi.csproj", "{247D8B5C-1AAD-0F13-B406-C24E9D1F36A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
