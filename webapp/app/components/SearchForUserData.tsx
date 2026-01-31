@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -8,28 +8,40 @@ import TextField from '@mui/material/TextField';
 import '../styles/styles.css';
 import { apiConfig } from "../config/apiConfig"
 import { UserData } from "../types/UserData";
+import { Autocomplete } from "@mui/material";
 
 interface SearchForUserDataProps {
   onUserDataLoaded: (users: UserData[]) => void;
   onError: (errorMessage: string) => void;
 }
 
+function getFetchURL(searchString: string) {
+  let fetchURL = apiConfig.apiEndpoint;
+  // If no search entered, return everything
+  if (searchString) {
+    const searchQuery = `/search?query=${encodeURIComponent(searchString)}`;
+    fetchURL += searchQuery;
+  }
+  return fetchURL;
+}
+
+function getFormattedUserData(userData: UserData): string {
+  if (userData) {
+    return `${userData.firstName} ${userData.lastName} `;
+  }
+  return "";
+}
 
 const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded, onError }) => {
   const [loading, setLoading] = useState(false);
-  const [searchString, setSearchString] = useState('');
+  const [searchString, setSearchString] = useState("");
+  const [autoCompleteQuery, setAutoCompleteQuery] = useState("");
+  const [autoCompleteMatches, setAutoCompleteMatches] = useState<UserData[]>([]);
 
   const searchForUsers = async () => {
     setLoading(true);
     try {
-      let fetchURL = apiConfig.apiEndpoint;
-      // If no search entered, return everything
-      if (searchString) {
-        const searchQuery = `/search?query=${encodeURIComponent(searchString)}`;
-        fetchURL += searchQuery;
-      }
-
-      const response = await fetch(fetchURL);
+      const response = await fetch(getFetchURL(searchString));
       const data: UserData[] = await response.json();
       onUserDataLoaded(data);
       onError("");
@@ -42,18 +54,42 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
     }
   };
 
+  useEffect(() => {
+    if (!autoCompleteQuery) {
+      setAutoCompleteMatches([]);
+      return;
+    }
+
+    const timeout = setTimeout(async () => {
+      const response = await fetch(getFetchURL(autoCompleteQuery));
+      const data: UserData[] = await response.json();
+      setAutoCompleteMatches(Array.isArray(data) ? data : []);
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [autoCompleteQuery]);
+
   return (
     <Box
         display="flex"
         flexDirection="row"
         gap={1}
         alignItems="center">
-      <TextField className="search-box"
-        placeholder="Search for a user..."
-        variant="outlined"
-        fullWidth
-        onChange={(e) => setSearchString(e.target.value)}
-      />
+      <Autocomplete // This is kind of cheating because MUI gives this for free, but I take it.
+        sx={{ width: 400 }}
+        options={autoCompleteMatches}
+        getOptionLabel={(userData) => getFormattedUserData(userData)}
+        onInputChange={(e, value) => setAutoCompleteQuery(value)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            className="search-box"
+            placeholder="Search for a user..."
+            variant="outlined"
+            fullWidth
+            onChange={(e) => setSearchString(e.target.value)}
+          />
+        )}/>
       <Button className="search-button"
           variant="contained" 
           color="primary" 
@@ -69,3 +105,4 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
 };
 
 export default SearchForUserData;
+
