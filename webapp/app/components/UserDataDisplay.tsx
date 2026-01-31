@@ -1,7 +1,8 @@
 "use client"
 
 import React, { useState } from "react";
-import Grid from '@mui/material/Grid';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import UserDataCard from './UserDataCard';
 import { UserData } from '../types/UserData';
@@ -40,11 +41,15 @@ const UserDataDisplay: React.FC = () => {
             <UserDataCard key={userDatum.id} userData={userDatum} />
         ))}
       </Box>
-      {errorMessage && (
-        <div style={{ marginTop: "1rem" }}>
+      <Snackbar
+          open={Boolean(errorMessage)}
+          autoHideDuration={4000}
+          onClose={() => setErrorMessage('')}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
+        <Alert severity="error" onClose={() => setErrorMessage('')} variant="filled">
           <strong>Error occurred:</strong> {errorMessage}
-        </div>
-      )}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

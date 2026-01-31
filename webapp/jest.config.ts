@@ -8,6 +8,7 @@ const config: JestConfigWithTsJest = {
     '\\.(css|scss|sass)$': 'identity-obj-proxy',
     // Handle absolute imports like "@/components/..."
     '^@/(.*)$': '<rootDir>/$1',
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };

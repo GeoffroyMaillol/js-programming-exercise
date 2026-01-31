@@ -1,19 +1,33 @@
 import { render, screen } from '@testing-library/react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import UserDataDisplay from './UserDataDisplay';
+import SearchForUserData from './SearchForUserData';
+import React, { act } from 'react';
 
+type Props = React.ComponentProps<typeof SearchForUserData>;
+let childProps: Props;
 
-const theme = createTheme();
+jest.mock('./SearchForUserData', () => {
+  const MockChild = (props: Props) => {
+    React.useLayoutEffect(() => {
+      childProps = props;
+    }, [props]);
 
-const renderWithTheme = (ui: React.ReactElement) =>
-  render(<ThemeProvider theme={theme}>{ui}</ThemeProvider>);
+    return <div>Mock Child</div>;
+  };
 
-test('renders label', () => {
-  renderWithTheme(<UserDataDisplay />);
-  expect(screen.getByPlaceholderText('Search for a user...')).toBeInTheDocument();
+  MockChild.displayName = 'MockSearchForUserData';
+  return {
+    __esModule: true,
+    default: MockChild,
+  };
 });
 
-test('renders button', () => {
-  renderWithTheme(<UserDataDisplay />);
-  expect(screen.getByText('Go!')).toBeInTheDocument();
+test('shows error message in snackbar', () => {
+  render(<UserDataDisplay />);
+  expect(screen.queryByText("Something went wrong")).not.toBeInTheDocument();
+  act(() => {
+    childProps.onError("Something went wrong");
+  });
+
+  expect(screen.getByText("Something went wrong")).toBeInTheDocument();
 });
