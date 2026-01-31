@@ -28,11 +28,12 @@
   border-radius: 24px;
 }
 
-.search-button.MuiButton-contained {
+.standard-button.MuiButton-contained {
   background-color: #d21969;
+  border-radius: 24px
 }
 
-.search-button.MuiButton-contained:hover {
+.standard-button.MuiButton-contained:hover {
   background-color: darkred;
 }
 

@@ -18,7 +18,7 @@ interface SearchForUserDataProps {
 function getFetchURL(searchString: string) {
   let fetchURL = apiConfig.apiEndpoint;
   // If no search entered, return everything
-  if (searchString) {
+  if (searchString.trim()) {
     const searchQuery = `/search?query=${encodeURIComponent(searchString)}`;
     fetchURL += searchQuery;
   }
@@ -45,6 +45,7 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
       const data: UserData[] = await response.json();
       onUserDataLoaded(data);
       onError("");
+      setSearchString(""); // Reinitialise the search string, otherwise the search button stops working for empty search
     } catch (err) {
       console.error("API call failed", err);
       onError("Error calling API");
@@ -87,17 +88,13 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
             placeholder="Search for a user..."
             variant="outlined"
             fullWidth
-            onChange={(e) => setSearchString(e.target.value)}
-          />
+            onChange={(e) => setSearchString(e.target.value)} />
         )}/>
-      <Button className="search-button"
+      <Button className="standard-button"
           variant="contained" 
-          color="primary" 
+          color="primary"
           onClick={searchForUsers} 
-          disabled={loading}
-          sx={{
-            borderRadius: '24px'
-          }}>
+          disabled={loading}>
         {loading ? <CircularProgress size={24} /> : "Go!"}
       </Button>
     </Box>
