@@ -10,7 +10,7 @@ public static class UserDataEndpoints
     public static void MapProductEndpoints(this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup("/api/users");
-
+        // Should use pagination for a lot of user, but overkill right now. 
         group.MapGet("/", async (AppDbContext db) =>
             await db.UserData.ToListAsync());
 

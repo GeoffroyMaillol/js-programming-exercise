@@ -13,16 +13,19 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=app.db"));
-builder.Services.AddCors(options =>
+if (spaConfig != null)
 {
-    // Minimal security here, for the purpose of the exercise. May need to be more restrictive for an actual application.
-    options.AddPolicy("spa_permissions", policy =>
+    builder.Services.AddCors(options =>
     {
-        policy.WithOrigins(spaConfig.HostUrl)
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        // Minimal security here, for the purpose of the exercise. May need to be more restrictive for an actual application.
+        options.AddPolicy("spa_permissions", policy =>
+        {
+            policy.WithOrigins(spaConfig.HostUrl)
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
     });
-});
+}
 
 var app = builder.Build();
 app.UseCors("spa_permissions");
