@@ -4,6 +4,10 @@ This projects contains the implemation of a REST API to feed user data to a cons
 
 It was developed in .Net 10.0.
 
+## Design decisions
+
+Unit tests were not setup for this project, as the logic here is fairly simple and unit tests wouldn't add that much value.
+
 ## Initial setup
 
 ### Initial database creation
@@ -16,6 +20,9 @@ dotnet tool install --global dotnet-ef
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
+This can also be used to reset a test database, 
+* delete the `app.db` file, and the `Migration` folder
+* re-run the above commands.
 
 ## Running the API
 
