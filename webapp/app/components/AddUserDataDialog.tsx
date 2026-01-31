@@ -23,12 +23,15 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [saving, setSaving] = useState(false);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^\+?[0-9 ()-]{7,20}$/;
+
 
   const handleSave = async () => {
     setSaving(true);
@@ -49,6 +52,7 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
       setFirstName("");
       setLastName("");
       setPhone("");
+      setPhoneNumberError("");
       setJobTitle("");
       setEmail("");
       setEmailError("");
@@ -58,6 +62,15 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
       onSave?.("Unable to save user");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handlePhoneNumberChange = (value: string) => {
+    setPhone(value);
+    if (!phoneRegex.test(value)) {
+        setPhoneNumberError("Please enter a valid phone number");
+    } else {
+        setPhoneNumberError("");
     }
   };
 
@@ -99,9 +112,10 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
           <TextField
             label="Phone Number"
             value={phone}
-            type="number"
-            onChange={(e) => setPhone(e.target.value)}
-            fullWidth />
+            onChange={(e) => handlePhoneNumberChange(e.target.value)}
+            fullWidth
+            error={!!phoneNumberError}
+            helperText={phoneNumberError} />
 
           <TextField
             label="Email"

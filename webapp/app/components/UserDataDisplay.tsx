@@ -32,9 +32,10 @@ const UserDataDisplay: React.FC = () => {
     <Box
         display="flex"
         flexDirection="column"
-        justifyContent="center" 
         alignItems="center"
-        height="100vh"
+        justifyContent="center"
+        minHeight="100vh"
+        paddingTop={2}
         gap={1}>
       <SearchForUserData 
         onUserDataLoaded={handleUserDataLoaded}
