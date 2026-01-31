@@ -32,9 +32,8 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^\+?[0-9 ()-]{7,20}$/;
 
-
   const handleSave = async () => {
-    if (emailError || phoneNumberError) {
+    if (!firstName || !lastName || !email || emailError || phoneNumberError) {
       onSave?.("Please resolve validation issues.", false);
       return;
     }
@@ -72,18 +71,18 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
   const handlePhoneNumberChange = (value: string) => {
     setPhone(value);
     if (!phoneRegex.test(value)) {
-        setPhoneNumberError("Please enter a valid phone number");
+      setPhoneNumberError("Please enter a valid phone number");
     } else {
-        setPhoneNumberError("");
+      setPhoneNumberError("");
     }
   };
 
   const handleEmailChange = (value: string) => {
     setEmail(value);
-    if (!emailRegex.test(value)) {
-        setEmailError("Please enter a valid email address, abdcde@abcde.abc");
+    if (!value || !emailRegex.test(value)) {
+      setEmailError("Please enter a valid email address, abdcde@abcde.abc");
     } else {
-        setEmailError("");
+      setEmailError("");
     }
   };
 
@@ -98,13 +97,19 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
                 label="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                fullWidth />
+                fullWidth
+                error={!firstName}
+                helperText={!firstName ? "First name is required" : " "}
+                required />
 
             <TextField
                 label="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                fullWidth />
+                fullWidth
+                error={!lastName}
+                helperText={!lastName ? "Last name is required" : " "}
+                required />
           </Box>
 
           <TextField
@@ -126,8 +131,9 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
             value={email}
             onChange={(e) => handleEmailChange(e.target.value)}
             fullWidth
-            error={!!emailError}
-            helperText={emailError} />
+            error={!email || !!emailError}
+            helperText={emailError}
+            required />
         </Box>
       </DialogContent>
 
