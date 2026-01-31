@@ -15,7 +15,7 @@ import { apiConfig } from "../config/apiConfig";
 interface AddUSerDataDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (outcomeMessage: string) => void;
+  onSave: (outcomeMessage: string, success: boolean) => void;
 }
 
 export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialogProps) {
@@ -34,6 +34,10 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
 
 
   const handleSave = async () => {
+    if (emailError || phoneNumberError) {
+      onSave?.("Please resolve validation issues.", false);
+      return;
+    }
     setSaving(true);
 
     try {
@@ -48,7 +52,7 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
       }
 
       const createdUser: UserData = await response.json();
-      onSave?.("User successfully created");
+      onSave?.("User successfully created!", true);
       setFirstName("");
       setLastName("");
       setPhone("");
@@ -59,7 +63,7 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
       onClose();
     } catch (err) {
       console.error(err);
-      onSave?.("Unable to save user");
+      onSave?.("Unable to save user", false);
     } finally {
       setSaving(false);
     }

@@ -12,7 +12,8 @@ import { AddUSerDataDialog } from './AddUserDataDialog';
 
 const UserDataDisplay: React.FC = () => {
   const [userData, setUserData] = useState<UserData[] | null>(null);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [userMessage, setUserMessage] = useState('');
+  const [isUserMessageError, setIsUserMessageError] = useState(false);
   const [showNewUserModal, setShowNewUserModal] = useState(false);
 
 
@@ -21,11 +22,19 @@ const UserDataDisplay: React.FC = () => {
   };
 
   const handleUserDataError = (errorMessage: string) => {
-    setErrorMessage(errorMessage);
+    setIsUserMessageError(true);
+    setUserMessage(errorMessage);
   };
 
-  const handleAddUserData = (outcomeMessage: string) => {
-    setErrorMessage(`Added new user: ${outcomeMessage}`);
+  const handleAddUserData = (outcomeMessage: string, success: boolean) => {
+    console.log(`Is success: ${success}`)
+    setIsUserMessageError(!success);
+    setUserMessage(outcomeMessage);
+  };
+
+  const resetUserMessage = () => {
+    setIsUserMessageError(false);
+    setUserMessage("");
   };
 
   return (
@@ -65,18 +74,18 @@ const UserDataDisplay: React.FC = () => {
         </Button>
       </Box>
       <Snackbar
-          open={Boolean(errorMessage)}
+          open={Boolean(userMessage)}
           autoHideDuration={10000}
-          onClose={() => setErrorMessage('')}
+          onClose={resetUserMessage}
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
-        <Alert severity="error" onClose={() => setErrorMessage('')} variant="filled">
-          <strong>Error occurred:</strong> {errorMessage}
+        <Alert severity={isUserMessageError ? "error" : "info"} onClose={resetUserMessage} variant="filled">
+          {isUserMessageError ? <strong>Error occurred:</strong> : ""} {userMessage}
         </Alert>
       </Snackbar>
       <AddUSerDataDialog
         isOpen={showNewUserModal}
         onClose={() => setShowNewUserModal(false)}
-        onSave={(outcomeMessage) => handleAddUserData(outcomeMessage)}
+        onSave={handleAddUserData}
       />
     </Box>
   );
