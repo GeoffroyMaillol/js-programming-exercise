@@ -52,9 +52,15 @@ const UserDataDisplay: React.FC = () => {
       </Box>
       <Box>
         <Button className="standard-button"
-          variant="contained" 
-          color="primary"
-          onClick={() => setShowNewUserModal(true)} >
+            variant="contained" 
+            color="primary"
+            onClick={() => setShowNewUserModal(true)}
+            sx={{
+              position: 'fixed',
+              bottom: 20,
+              left: "50%",
+            }}
+          >
           New User +
         </Button>
       </Box>
