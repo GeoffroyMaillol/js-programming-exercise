@@ -1,4 +1,4 @@
-# Serahc user data web app
+# Search user data web app
 
 This is the implementation of a Single Page Application that allows to enter user data and search for existing data. 
 
@@ -9,15 +9,16 @@ Next.js was selected as it is a common framework for React apps.
 
 MaterialUI was selected as the main UI library because of its flexibility.
 
-## Getting Started
+## Initial setup
 
 Install the dependencies with:
 ```bash
 npm install
 ```
 
-Run the development server:
+## Running the web app
 
+Run the development server:
 ```bash
 npm run dev
 ```

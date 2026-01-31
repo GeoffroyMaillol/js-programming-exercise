@@ -4,7 +4,9 @@ This projects contains the implemation of a REST API to feed user data to a cons
 
 It was developed in .Net 10.0.
 
-## Initial database creation
+## Initial setup
+
+### Initial database creation
 
 The API runs with a SQLite database to store data.
 If missing, it needs to be instatiated with:
@@ -21,6 +23,7 @@ In order to start the API, open a terminal in the location of the current ReadMe
 ```
 dotnet run
 ```
+
 This should run successfully and display:
 ```
 Now listening on: http://localhost:5052
