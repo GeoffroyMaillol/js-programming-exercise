@@ -2,6 +2,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import '../styles/styles.css';
 import { UserData } from '../types/UserData';
 
 interface UserCardProps {
@@ -10,20 +11,7 @@ interface UserCardProps {
 
 export default function UserDataCard( {userData}: UserCardProps) {
   return (
-    <Card
-        sx={{
-          borderRadius: '12px',
-          border: '1px solid white',
-          padding: 2,
-          maxWidth: 350,
-          boxShadow: 3,
-          opacity: 0,
-          animation: 'fadeIn 1s ease forwards',
-          '@keyframes fadeIn': {
-            from: { opacity: 0, transform: 'translateY(10px)' },
-            to: { opacity: 1, transform: 'translateY(0)' }
-          }
-        }}>
+    <Card className="user-data-card">
       <CardContent>
         <Typography variant="h6" fontWeight="bold">
           {userData.firstName} {userData.lastName}

@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import TextField from '@mui/material/TextField';
+import '../styles/styles.css';
 import { apiConfig } from "../config/apiConfig"
 import { UserData } from "../types/UserData";
 
@@ -41,18 +42,13 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
         flexDirection="row"
         gap={1}
         alignItems="center">
-      <TextField
+      <TextField className="search-box"
         placeholder="Search for a user..."
         variant="outlined"
         fullWidth
-        sx={{
-          '& .MuiOutlinedInput-root': {
-            borderRadius: '24px'
-          }
-        }}
         onChange={(e) => setSearchString(e.target.value)}
       />
-      <Button 
+      <Button className="search-button"
           variant="contained" 
           color="primary" 
           onClick={searchForUsers} 
