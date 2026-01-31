@@ -47,7 +47,8 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create user");
+        const error = await response.json();
+        throw new Error(error.message);
       }
 
       const createdUser: UserData = await response.json();
@@ -61,8 +62,7 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
       setEmailError("");
       onClose();
     } catch (err) {
-      console.error(err);
-      onSave?.("Unable to save user", false);
+      onSave?.(`Failed to create user: ${err}`, false);
     } finally {
       setSaving(false);
     }
@@ -96,7 +96,7 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
             <TextField
                 label="First Name"
                 value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value.trim())}
                 fullWidth
                 error={!firstName}
                 helperText={!firstName ? "First name is required" : " "}
@@ -105,7 +105,7 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
             <TextField
                 label="Last Name"
                 value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value.trim())}
                 fullWidth
                 error={!lastName}
                 helperText={!lastName ? "Last name is required" : " "}
@@ -115,13 +115,13 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
           <TextField
             label="Job title"
             value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}
+            onChange={(e) => setJobTitle(e.target.value.trim())}
             fullWidth />
 
           <TextField
             label="Phone Number"
             value={phone}
-            onChange={(e) => handlePhoneNumberChange(e.target.value)}
+            onChange={(e) => handlePhoneNumberChange(e.target.value.trim())}
             fullWidth
             error={!!phoneNumberError}
             helperText={phoneNumberError} />
@@ -129,7 +129,7 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
           <TextField
             label="Email"
             value={email}
-            onChange={(e) => handleEmailChange(e.target.value)}
+            onChange={(e) => handleEmailChange(e.target.value.trim())}
             fullWidth
             error={!email || !!emailError}
             helperText={emailError}

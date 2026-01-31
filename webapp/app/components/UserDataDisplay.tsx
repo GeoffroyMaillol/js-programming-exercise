@@ -27,7 +27,6 @@ const UserDataDisplay: React.FC = () => {
   };
 
   const handleAddUserData = (outcomeMessage: string, success: boolean) => {
-    console.log(`Is success: ${success}`)
     setIsUserMessageError(!success);
     setUserMessage(outcomeMessage);
   };
