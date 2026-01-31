@@ -56,7 +56,7 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
   };
 
   useEffect(() => {
-    if (!autoCompleteQuery) {
+    if (!autoCompleteQuery || autoCompleteQuery.length < 2) {
       setAutoCompleteMatches([]);
       return;
     }
@@ -76,7 +76,7 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
         flexDirection="row"
         gap={1}
         alignItems="center">
-      <Autocomplete // This is kind of cheating because MUI gives this for free, but I take it.
+      <Autocomplete // This feels like cheating because MUI gives this for free, but I take it.
         sx={{ width: 400 }}
         options={autoCompleteMatches}
         getOptionLabel={(userData) => getFormattedUserData(userData)}

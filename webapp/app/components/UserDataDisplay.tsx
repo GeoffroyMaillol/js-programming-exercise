@@ -68,8 +68,7 @@ const UserDataDisplay: React.FC = () => {
               position: 'fixed',
               bottom: 20,
               left: "50%",
-            }}
-          >
+            }}>
           New User +
         </Button>
       </Box>
@@ -85,8 +84,7 @@ const UserDataDisplay: React.FC = () => {
       <AddUSerDataDialog
         isOpen={showNewUserModal}
         onClose={() => setShowNewUserModal(false)}
-        onSave={handleAddUserData}
-      />
+        onSave={handleAddUserData} />
     </Box>
   );
 };
