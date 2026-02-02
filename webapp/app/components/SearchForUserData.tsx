@@ -120,7 +120,7 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
     option: UserData,
     inputValue: string
   ) => {
-    const displayUserData = `${option.firstName} ${option.lastName} (${option.id})`;
+    const displayUserData = `${option.firstName} ${option.lastName} (${option.email})`;
     const match = findMatch(displayUserData, inputValue);
     const parts = splitText(displayUserData, match);
 
