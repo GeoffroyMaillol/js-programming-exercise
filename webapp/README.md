@@ -1,6 +1,6 @@
 # Search user data webapp
 
-This is the implementation of a Single Page Application that allows to enter user data and search for existing data. 
+This is the implementation of a Single Page Application that allows to enter user data and search for existing user data. 
 
 It is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 

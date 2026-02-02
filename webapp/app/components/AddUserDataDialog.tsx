@@ -17,6 +17,9 @@ interface AddUSerDataDialogProps {
   onSave: (outcomeMessage: string, success: boolean) => void;
 }
 
+/**
+ * Component handling the entry for new UserData.
+ */
 export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialogProps) {
   const [id] = useState(0);
   const [firstName, setFirstName] = useState("");

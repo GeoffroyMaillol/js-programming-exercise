@@ -9,6 +9,9 @@ interface UserCardProps {
   userData: UserData;
 }
 
+/**
+ * Defines a card to display the full user data.
+ */
 export default function UserDataCard( {userData}: UserCardProps) {
   return (
     <Card className="user-data-card">

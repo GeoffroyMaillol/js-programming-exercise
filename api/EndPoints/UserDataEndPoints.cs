@@ -29,7 +29,7 @@ public static class UserDataEndpoints
             return Results.BadRequest("Query cannot be empty");
 
         var lower = query.ToLower();
-
+        // LINQ should be safe to injection vulnerabilities
         var userData = await db.UserData
             .Where(u =>
                 u.FirstName.ToLower().Contains(lower) ||

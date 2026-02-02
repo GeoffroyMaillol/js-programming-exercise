@@ -1,6 +1,6 @@
 # REST API
 
-This projects contains the implemation of a REST API to feed user data to a consumer.
+This projects contains the implementation of a REST API to feed user data to a consumer.
 
 It was developed in .Net 10.0.
 
@@ -21,7 +21,7 @@ No specific instruction was provided for user uniqueness, it was therefore decid
 ### Initial database creation
 
 The API runs with a SQLite database to store data.
-If missing, it needs to be instatiated with:
+If missing, it needs to be instantiated with:
 ```
 dotnet tool install --global dotnet-ef
 

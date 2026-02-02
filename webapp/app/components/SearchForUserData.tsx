@@ -73,6 +73,9 @@ function splitText(text: string, match: number[][]) {
   ];
 }
 
+/**
+ * Component handling searching for UserData.
+ */
 const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded, onError }) => {
   const [loading, setLoading] = useState(false);
   const [searchString, setSearchString] = useState("");

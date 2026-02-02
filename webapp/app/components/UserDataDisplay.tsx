@@ -10,6 +10,9 @@ import SearchForUserData from './SearchForUserData';
 import { Button } from "@mui/material";
 import { AddUSerDataDialog } from './AddUserDataDialog';
 
+/**
+ * Panel to host all UserData-related components: Search, results, and adding a new user.
+ */
 const UserDataDisplay: React.FC = () => {
   const [userData, setUserData] = useState<UserData[] | null>(null);
   const [userMessage, setUserMessage] = useState('');
