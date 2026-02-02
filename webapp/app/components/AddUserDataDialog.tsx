@@ -9,7 +9,6 @@ import {
   CircularProgress
 } from "@mui/material";
 import { useState } from "react";
-import { UserData } from "../types/UserData";
 import { apiConfig } from "../config/apiConfig";
 
 interface AddUSerDataDialogProps {
@@ -51,7 +50,6 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
         throw new Error(error.message);
       }
 
-      const createdUser: UserData = await response.json();
       onSave?.("User successfully created!", true);
       setFirstName("");
       setLastName("");
@@ -153,3 +151,5 @@ export function AddUSerDataDialog({ isOpen, onClose, onSave }: AddUSerDataDialog
     </Dialog>
   );
 }
+
+export default AddUSerDataDialog;
