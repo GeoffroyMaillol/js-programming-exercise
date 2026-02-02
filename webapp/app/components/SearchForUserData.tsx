@@ -132,6 +132,7 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
           <span
             key={index}
             style={{
+              whiteSpace: "pre",
               fontWeight: part.highlight ? 700 : 400,
               color: part.highlight ? "#011223" : "inherit"
             }}
