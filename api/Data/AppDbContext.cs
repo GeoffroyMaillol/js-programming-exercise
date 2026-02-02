@@ -41,10 +41,6 @@ public class AppDbContext : DbContext
             {
                 t.HasCheckConstraint("CK_User_Email_NotEmpty", "Email <> ''");
             });
-
-        modelBuilder.Entity<UserData>()
-            .HasIndex(u => new { u.FirstName, u.LastName })
-            .IsUnique();
         
         modelBuilder.Entity<UserData>()
             .HasIndex(u => new { u.Email })
