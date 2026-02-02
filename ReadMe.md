@@ -28,3 +28,14 @@ Please refer to the following documents for further details:
 For the project to function properly, both the REST API and web app need to be running.
 Please follow the above documentation to do so.
 
+## Design
+
+The requirements were interpreted as follows:
+* Clicking "Go!" with an empty search string should return all entries.
+* Clicking "Go!" with a search string entered should return the user data of all matches.
+* Clicking "Go!" with a search string that has no matches will display no item.
+* When typing in the search box, from 2 characters, autocomplete matches should be returned.
+* Searched characters should be highlighted in the matches.
+* When clicking a match, the corresponding user data should be displayed as the single result.
+
+
