@@ -15,6 +15,11 @@ interface SearchForUserDataProps {
   onError: (errorMessage: string) => void;
 }
 
+/**
+ * Formats the fetch URL
+ * @param searchString the search string to call the API with
+ * @returns the fetch URL to call the API with
+ */
 function getFetchURL(searchString: string) {
   let fetchURL = apiConfig.apiEndpoint;
   // If no search entered, return everything
@@ -25,9 +30,14 @@ function getFetchURL(searchString: string) {
   return fetchURL;
 }
 
+/**
+ * Formats a UserData into the full name 
+ * @param userData the user data object to format
+ * @returns the full name
+ */
 function getFormattedUserData(userData: UserData): string {
   if (userData) {
-    return `${userData.firstName} ${userData.lastName} `;
+    return `${userData.firstName} ${userData.lastName}`;
   }
   return "";
 }
@@ -63,7 +73,6 @@ function splitText(text: string, match: number[][]) {
   ];
 }
 
-
 const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded, onError }) => {
   const [loading, setLoading] = useState(false);
   const [searchString, setSearchString] = useState("");
@@ -87,20 +96,52 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
     }
   };
 
-  useEffect(() => {
+  const fetchAutoCompleteMatches = (autoCompleteQuery: string, setMatches: (u: UserData[]) => void) => {
     if (!autoCompleteQuery || autoCompleteQuery.length < 2) {
-      setAutoCompleteMatches([]);
+      setMatches([]);
       return;
     }
 
     const timeout = setTimeout(async () => {
       const response = await fetch(getFetchURL(autoCompleteQuery));
       const data: UserData[] = await response.json();
-      setAutoCompleteMatches(Array.isArray(data) ? data : []);
+      setMatches(Array.isArray(data) ? data : []);
     }, 300);
 
     return () => clearTimeout(timeout);
+  };
+
+  useEffect(() => {
+    return fetchAutoCompleteMatches(autoCompleteQuery, setAutoCompleteMatches);
   }, [autoCompleteQuery]);
+
+  const highlightSearchText = (
+    props: React.HTMLAttributes<HTMLLIElement> & { key?: string },
+    option: UserData,
+    inputValue: string
+  ) => {
+    const displayUserData = `${option.firstName} ${option.lastName} (${option.id})`;
+    const match = findMatch(displayUserData, inputValue);
+    const parts = splitText(displayUserData, match);
+
+    const { key, ...rest } = props;
+
+    return (
+      <li key={key} {...rest}>
+        {parts.map((part, index) => (
+          <span
+            key={index}
+            style={{
+              fontWeight: part.highlight ? 700 : 400,
+              color: part.highlight ? "#011223" : "inherit"
+            }}
+          >
+            {part.text}
+          </span>
+        ))}
+      </li>
+    );
+  };
 
   return (
     <Box
@@ -108,7 +149,7 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
         flexDirection="row"
         gap={1}
         alignItems="center">
-      <Autocomplete // This feels like cheating because MUI gives this for free, but I take it.
+      <Autocomplete
         sx={{ width: 400 }}
         options={autoCompleteMatches}
         slotProps={{
@@ -119,11 +160,19 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
               boxShadow: 6,
               paddingY: 1,
               marginTop: "5px",
+              border: "1px solid white",
             }
           }
         }}
         getOptionLabel={(userData) => getFormattedUserData(userData)}
         onInputChange={(e, value) => setAutoCompleteQuery(value)}
+        onChange={(e, newValue) => {
+          if (newValue) {
+            onUserDataLoaded([newValue]);
+          }
+          setAutoCompleteQuery("");
+          setSearchString("");
+        }}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -133,26 +182,7 @@ const SearchForUserData: React.FC<SearchForUserDataProps> = ({ onUserDataLoaded,
             fullWidth
             onChange={(e) => setSearchString(e.target.value)} />
         )}
-        renderOption={(props, option, { inputValue }) => {
-          // This is to highlight matches in the Autocomplete suggestion.
-          const match = findMatch(`${option.firstName} ${option.lastName}`, inputValue);
-          const parts = splitText(`${option.firstName} ${option.lastName}`, match);
-
-          return (
-            <li {...props}>
-              {parts.map((part: { text: string; highlight: boolean }, index: number) => (
-                <span
-                    key={index}
-                    style={{
-                      fontWeight: part.highlight ? 700 : 400,
-                      color: part.highlight ? "#011223" : "inherit"
-                    }}>
-                  {part.text}
-                </span>
-              ))}
-            </li>
-          );
-        }}/>
+        renderOption={(props, option, { inputValue }) => highlightSearchText(props, option, inputValue)}/>
       <Button className="standard-button"
           variant="contained" 
           color="primary"
