@@ -24,13 +24,12 @@ The requirements were interpreted as follows:
 The application was developed in a Windows environment.
 While all technologies should allow development on other platforms, the dev environment set up was only tested on Windows (due to time constraints).
 
-In order to run the various examples, please follow these steps:
-* Install [.Net 10.0 SDK](https://dotnet.microsoft.com/en-us/download)
-* Install [Node 24](https://nodejs.org/en/download)
-* Install [VS Code](https://code.visualstudio.com/download)
-* Open the directory this ReadMe is in with VS Code
+In order to set up a local development environment, the following will need to be installed:
+* [.Net 10.0 SDK](https://dotnet.microsoft.com/en-us/download)
+* [Node 24](https://nodejs.org/en/download)
+* [VS Code](https://code.visualstudio.com/download)
 
-Additionally, you can [install Docker](https://docs.docker.com/desktop/setup/install/windows-install/).
+Additionally (or alternately), you can [install Docker](https://docs.docker.com/desktop/setup/install/windows-install/).
 
 ## Further documentation
 
@@ -43,7 +42,12 @@ Please refer to the following documents for further details:
 For the project to function properly, both the REST API and web app need to be running.
 Please follow the above documentation to do so.
 
-If you have Docker, you can just run:
+If you have Docker, you can run:
 ```
 docker-compose up --build
 ```
+
+The webapp should be available at http://localhost:3000
+The REST API at http://localhost:5000
+
+

@@ -29,7 +29,7 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 This can also be used to reset a test database, 
-* delete the `app.db` file, and the `Migration` folder
+* delete the `app.db` file, and the `Migration` folder,
 * re-run the above commands.
 
 ## Running the API
