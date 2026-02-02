@@ -5,9 +5,9 @@ This is the implementation of a Single Page Application that allows to enter use
 It is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Design
-The following techologies were selected to create this app:
+The following technologies were selected to create this app:
 * React - to go with the developer's familiarity.
-* Next.js / TypeScript - as it is a common modern framework to support React apps.
+* Next.js / TypeScript - as it is a common modern and supported framework to support React apps.
 * MaterialUI - as the main UI library because it provides a number of flexible components.
 
 ## Initial setup

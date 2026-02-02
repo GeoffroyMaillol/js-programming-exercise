@@ -40,14 +40,14 @@ Please refer to the following documents for further details:
 ## Running the application
 
 For the project to function properly, both the REST API and web app need to be running.
-Please follow the above documentation to do so.
 
 If you have Docker, you can run:
 ```
 docker-compose up --build
 ```
+This should create and run the required components in Docker containers.
 
 The webapp should be available at http://localhost:3000
 The REST API at http://localhost:5000
 
-
+The components can also be run separately on a development machine, please follow the above documentation (for Webapp / API) to do so.
