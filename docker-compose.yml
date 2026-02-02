@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    container_name: api
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api:/src
+    networks:
+      - appnet
+
+  webapp:
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile.dev
+    container_name: webapp
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./webapp:/app
+    environment:
+      - NEXT_PUBLIC_API_HOST=api
+      - NEXT_PUBLIC_API_PORT=5000
+    depends_on:
+      - api
+    networks:
+      - appnet
+
+networks:
+  appnet:
