@@ -41,8 +41,9 @@ Please refer to the following documents for further details:
 
 For the project to function properly, both the REST API and web app need to be running.
 
-If you have Docker, you can run:
+If you have Docker, open a powershell terminal in the folder of this ReadMe and run:
 ```
+.\Initialise-Database.ps1
 docker-compose up --build
 ```
 This should create and run the required components in Docker containers.
