@@ -55,22 +55,17 @@ docker-compose up --build
 ```
 This should initialise a test database, create and run the required components in Docker containers.
 
-The webapp should then be available at http://localhost:3000
-The REST API at http://localhost:5000
+The webapp should then be available at http://localhost:3000, and the REST API at http://localhost:5000.
 
-The components can also be run separately on a development machine, please follow the above documentation (for Webapp / API) to do so.
+The components can also be run separately, without Docker, please follow the above documentation (for Webapp / API) to do so.
 
 
 ## Further potential development
 
-To extend the behaviour of the application, obvious steps would be to allow the web app to delete and update existing data.
-
-It would feel appropriate to extend the unit tests to ensure more coverage of the app's behaviour is validated.
-
-Implementing a "proper" database would probably then be next, with an additional Docker container using for example PostgreSQL.
-
-The Docker setup is also rudimentary, and only intended to be used for development purposes. Productionising it would be valuable.
-
-The UI could probably also use a bit more flair, with better transitions on load / unload (only minimal effort was involved in this development run).
-
-We should probably have a pass at vulnerability testing, the app *should* generally be safe (the technologies used should be safe), but this wasn't tested in anger. 
+Potential further improvements:
+* Allow the web app to delete and update existing data.
+* It would feel appropriate to extend the unit tests to ensure more coverage of the app's behaviour is validated.
+* Implementing a "proper" database would probably then be next, with an additional Docker container using for example PostgreSQL.
+* The Docker setup is also rudimentary, and only intended to be used for development purposes. Productionising it would be valuable.
+* The UI could probably also use a bit more flair, with better transitions on load / unload (only minimal effort was involved in this development run).
+* We should probably have a pass at vulnerability testing, the app *should* generally be safe (the technologies used should be safe), but this wasn't tested in anger. 
