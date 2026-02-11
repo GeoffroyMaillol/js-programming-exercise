@@ -1,0 +1,29 @@
+
+:host {
+  display: flex;
+  justify-content: center;   
+  align-items: center;
+  height: 100vh;
+}
+
+.search-container {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  height: 56px;
+}
+
+.search-field {
+  min-width: 300px;
+  --mdc-outlined-text-field-container-shape: 999px;
+}
+
+.search-field .mat-mdc-form-field-flex {
+  height: 100%;
+}
+
+
+button[mat-raised-button] {
+  height: 100%;
+}
+

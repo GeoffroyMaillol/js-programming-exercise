@@ -1,0 +1,10 @@
+<div class="search-container">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search for a user</mat-label>
+    <input matInput [(ngModel)]="query" placeholder="Search for a user..." />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="onSearch()">
+    Go!
+  </button>
+</div>
