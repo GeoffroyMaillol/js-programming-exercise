@@ -2,13 +2,17 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { Title } from '@angular/platform-browser';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { UserData } from './types/UserData';
 
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     RouterOutlet,
     SearchFormComponent,
+    SearchResultsComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
@@ -16,6 +20,7 @@ import { Title } from '@angular/platform-browser';
 export class App {
   protected readonly title = signal('Search Webapp Angular');
   private readonly titleService = inject(Title);
+  results = signal<UserData[]>([]);
 
   constructor() {
     effect(() => {

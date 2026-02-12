@@ -1,6 +1,7 @@
 <main class="main">
   <div class="content">
-    <app-search-form></app-search-form>
+    <app-search-form (resultsChange)="results.set($event)"></app-search-form>
+    <app-search-results [results]="results"></app-search-results>
   </div>
 </main>
 
