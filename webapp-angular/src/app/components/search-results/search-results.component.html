@@ -2,8 +2,7 @@
     No results yet.
 </div>
 
-<ul *ngIf="results().length > 0">
-    <li *ngFor="let user of results()">
-    {{ user.firstName }}
-    </li>
-</ul>
+<div *ngIf="results().length > 0">
+  <app-user-data-card *ngFor="let userData of results()" [userData]="userData"></app-user-data-card>
+</div>
+
