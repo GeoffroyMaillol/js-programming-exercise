@@ -1,8 +1,8 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SearchFormComponent } from './search-form/search-form.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 import { Title } from '@angular/platform-browser';
-import { SearchResultsComponent } from './search-results/search-results.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { UserData } from './types/UserData';
 
 

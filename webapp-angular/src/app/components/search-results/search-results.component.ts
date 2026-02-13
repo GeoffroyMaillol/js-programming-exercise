@@ -1,5 +1,5 @@
 import { Component, Input, signal } from '@angular/core';
-import { UserData } from '../types/UserData';
+import { UserData } from '../../types/UserData';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({

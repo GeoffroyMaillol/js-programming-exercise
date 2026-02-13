@@ -37,7 +37,7 @@ describe('SearchService', () => {
       expect(result).toEqual(mockResponse);
     });
 
-    const req = httpMock.expectOne('http://test-api/users?query=john');
+    const req = httpMock.expectOne('http://test-api/users/search?query=john');
     expect(req.request.method).toBe('GET');
 
     req.flush(mockResponse);

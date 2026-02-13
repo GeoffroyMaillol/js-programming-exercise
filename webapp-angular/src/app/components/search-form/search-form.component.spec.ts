@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchFormComponent } from './search-form.component';
-import { SearchService } from '../services/userdata.search.service';
+import { SearchService } from '../../services/userdata.search.service';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { of } from 'rxjs';

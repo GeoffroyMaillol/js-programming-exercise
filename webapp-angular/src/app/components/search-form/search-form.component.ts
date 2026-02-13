@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { UserData } from '../types/UserData';
-import { SearchService } from '../services/userdata.search.service';
+import { UserData } from '../../types/UserData';
+import { SearchService } from '../../services/userdata.search.service';
 
 @Component({
   selector: 'app-search-form',
