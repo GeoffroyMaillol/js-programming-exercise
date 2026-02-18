@@ -1,8 +1,8 @@
-<div *ngIf="results().length === 0">
+<div *ngIf="results.length === 0">
     No results yet.
 </div>
 
-<div *ngIf="results().length > 0">
-  <app-user-data-card *ngFor="let userData of results()" [userData]="userData"></app-user-data-card>
+<div *ngIf="results.length > 0">
+  <app-user-data-card *ngFor="let userData of results" [userData]="userData"></app-user-data-card>
 </div>
 

@@ -11,5 +11,5 @@ import { UserDataCard } from '../user-data-card/user-data-card';
   styleUrl: './search-results.component.css',
 })
 export class SearchResultsComponent {
-  @Input({ required: true }) results = signal<UserData[]>([]);
+  @Input({ required: true }) results: UserData[] = [];
 }
