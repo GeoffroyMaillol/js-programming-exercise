@@ -1,7 +1,12 @@
-.card {
+:host {
+  display: block;
+  width: auto;
+}
+
+.user-data-card {
+  background-color: inherit;
+  color: inherit;
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 8px;
-  background: #fff;
-  margin-bottom: 1rem;
 }

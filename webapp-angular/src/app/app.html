@@ -1,8 +1,11 @@
 <main class="main">
-  <div class="content">
-    <app-search-form (resultsChange)="results.set($event)"></app-search-form>
+  <div class="page" [class.centered]="results().length === 0">
+    <div class="search-container">
+      <app-search-form (resultsChange)="results.set($event)"></app-search-form>
+    </div>
     <app-search-results [results]="results()"></app-search-results>
+    <router-outlet />
   </div>
 </main>
 
-<router-outlet />
+
