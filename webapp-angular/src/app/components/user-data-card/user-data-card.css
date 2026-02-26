@@ -1,10 +1,11 @@
 :host {
   display: block;
   width: auto;
+  opacity: 0;
 }
 
 :host(.animate) {
-  animation: fadeInUp 300ms ease-out;
+  animation: fadeInUp 500ms ease-out forwards;
 }
 
 .user-data-card {

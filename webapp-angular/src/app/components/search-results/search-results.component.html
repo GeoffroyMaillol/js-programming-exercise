@@ -1,5 +1,9 @@
 
 <div class="results-grid" *ngIf="results.length > 0">
-  <app-user-data-card *ngFor="let userData of results" [userData]="userData"></app-user-data-card>
+  <app-user-data-card 
+    *ngFor="let userData of results; let i = index"
+    [userData]="userData"
+    [delay]="i * 300">
+  </app-user-data-card>
 </div>
 
