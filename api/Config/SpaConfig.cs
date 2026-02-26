@@ -5,5 +5,5 @@ namespace UserDataApi.Config;
 /// </summary>
 public class SpaConfig
 {
-    public string HostUrl { get; set; } = "";
+    public string[] HostUrls { get; set; } = Array.Empty<string>();
 }
