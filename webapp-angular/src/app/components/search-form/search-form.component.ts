@@ -57,12 +57,17 @@ export class SearchFormComponent {
   onSearch() {
     console.log('Searching for:', this.query);
     this.autoCompletePanelTrigger.closePanel();
-    if (!this.query.trim()) return;
-
-    this.searchService.searchUserData(this.query).subscribe(items => {
-      this.results.set(items);
-      this.resultsChange.emit(items);
-    });
+    if (!this.query.trim()) {
+      this.searchService.getAllUserData().subscribe(items => {
+        this.results.set(items);
+        this.resultsChange.emit(items);
+      });
+    } else {
+      this.searchService.searchUserData(this.query).subscribe(items => {
+        this.results.set(items);
+        this.resultsChange.emit(items);
+      });
+    }
   }
 
   onUserSelected(user: UserData) {

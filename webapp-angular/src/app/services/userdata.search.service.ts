@@ -21,4 +21,10 @@ export class SearchService {
     console.log(`Fetch URL: ${url}`);
     return this.http.get<UserData>(url);
   }
+
+  getAllUserData(): Observable<UserData[]> {
+    const url = `${this.config.apiEndpoint}`;
+    console.log(`Fetch URL: ${url}`);
+    return this.http.get<UserData[]>(url);
+  }
 }
