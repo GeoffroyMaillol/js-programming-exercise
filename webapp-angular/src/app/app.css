@@ -17,11 +17,11 @@
   justify-content: center;
   min-height: 100vh;
   padding: 0;
-  transform: translateY(0);
+  transform: translateY(0vh);
 }
 
 .page:not(.centered) {
-  transform: translateY(0vh);
+  transform: translateY(5vh);
 }
 
 .search-container {

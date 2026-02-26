@@ -3,6 +3,10 @@
   width: auto;
 }
 
+:host(.animate) {
+  animation: fadeInUp 300ms ease-out;
+}
+
 .user-data-card {
   background-color: inherit;
   color: inherit;
