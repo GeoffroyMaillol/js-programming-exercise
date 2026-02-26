@@ -4,14 +4,17 @@
   width: 100%;
 }
 
-:host ::ng-deep .search-field .mdc-notched-outline__leading {
-  border-radius: 9999px 0 0 9999px !important;
-}
-
 .search-container {
   display: flex;
   align-items: stretch;
   height: 56px;
+  border-radius: 9999px 0 0 9999px !important;
+}
+
+.search-field {
+  border-radius: 9999px 0 0 9999px !important;
+  width: 300px;
+  padding: 25px;
 }
 
 .search-btn {
@@ -23,9 +26,20 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  border-radius: 0 12px 12px 0;
+  border-radius: 0 9999px 9999px 0;
 }
 
 .search-btn:hover {
   background-color: #ae028c;
 }
+
+.mat-mdc-option {
+  padding: 0px 0px 0px 24px;
+}
+
+.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  background: #e31497;
+}
+
+
+

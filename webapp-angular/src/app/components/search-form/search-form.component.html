@@ -1,7 +1,21 @@
 <div class="search-container">
-  <mat-form-field appearance="outline" class="search-field">
-    <input matInput [(ngModel)]="query" placeholder="Search for a user..." />
-  </mat-form-field>
+  <input
+    class="search-field"
+    [(ngModel)]="query"
+    [matAutocomplete]="auto"
+    [formControl]="autoCompleteControl"
+    placeholder="Search for a user..."
+    (keydown.enter)="onSearch()"
+  />
+
+  <mat-autocomplete 
+    #auto="matAutocomplete"
+    (optionSelected)="onUserSelected($event.option.value)"
+  >
+    <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+      {{ user.firstName}} {{ user.lastName }} ({{ user.email }})
+    </mat-option>
+  </mat-autocomplete>
 
   <button class="search-btn" (click)="onSearch()">
     Go!

@@ -15,4 +15,10 @@ export class SearchService {
     console.log(`Fetch URL: ${url}`);
     return this.http.get<UserData[]>(url);
   }
+
+  searchUserDataById(id: number): Observable<UserData> {
+    const url = `${this.config.apiEndpoint}/${id}`;
+    console.log(`Fetch URL: ${url}`);
+    return this.http.get<UserData>(url);
+  }
 }
