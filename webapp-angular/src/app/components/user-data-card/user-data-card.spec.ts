@@ -6,7 +6,6 @@ describe('UserDataCard', () => {
   let component: UserDataCard;
   let fixture: ComponentFixture<UserDataCard>;
   let element: HTMLElement;
-;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

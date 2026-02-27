@@ -8,7 +8,7 @@ import { UserData } from '../../types/UserData';
 import { SearchService } from '../../services/userdata.search.service';
 import { Observable, of, startWith, switchMap } from 'rxjs';
 import { MatAutocomplete } from '@angular/material/autocomplete';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-search-form',
@@ -21,7 +21,6 @@ import { AsyncPipe, NgFor } from '@angular/common';
     MatAutocomplete,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    NgFor,
     AsyncPipe,
   ],
   templateUrl: './search-form.component.html',
@@ -37,8 +36,7 @@ export class SearchFormComponent {
   constructor(private searchService: SearchService) {}
 
   autoCompleteControl = new FormControl('');
-
-  filteredUsers = this.autoCompleteControl.valueChanges.pipe(
+  autoCompleteData = this.autoCompleteControl.valueChanges.pipe(
     startWith(''),
     switchMap(value => {
       const searchString = typeof value === 'string' ? value : '';

@@ -9,12 +9,13 @@
   />
 
   <mat-autocomplete 
-    #auto="matAutocomplete"
-    (optionSelected)="onUserSelected($event.option.value)"
-  >
-    <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
-      {{ user.firstName}} {{ user.lastName }} ({{ user.email }})
-    </mat-option>
+      #auto="matAutocomplete"
+      (optionSelected)="onUserSelected($event.option.value)" >
+    @for (user of autoCompleteData | async; track user.id) {
+      <mat-option [value]="user">
+        {{ user.firstName}} {{ user.lastName }} ({{ user.email }})
+      </mat-option>
+    }
   </mat-autocomplete>
 
   <button class="search-btn" (click)="onSearch()">
