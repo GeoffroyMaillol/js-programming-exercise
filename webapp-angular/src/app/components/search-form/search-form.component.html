@@ -11,7 +11,7 @@
   <mat-autocomplete 
       #auto="matAutocomplete"
       (optionSelected)="onUserSelected($event.option.value)" >
-    @for (user of autoCompleteData | async; track user.id) {
+    @for (user of (autoCompleteData$ | async) ?? []; track user.id) {
       <mat-option [value]="user">
         {{ user.firstName}} {{ user.lastName }} ({{ user.email }})
       </mat-option>

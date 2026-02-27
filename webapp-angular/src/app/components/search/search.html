@@ -1,0 +1,10 @@
+<div class="page" [class.centered]="results().length === 0">
+    <div class="search-container">
+        <app-search-form (resultsChange)="results.set($event)"></app-search-form>
+    </div>
+    <app-search-results [results]="results()"></app-search-results>
+    <button class="fab" >
+        + Add User
+    </button>
+</div>
+

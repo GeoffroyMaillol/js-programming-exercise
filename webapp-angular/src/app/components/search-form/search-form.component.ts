@@ -36,7 +36,7 @@ export class SearchFormComponent {
   constructor(private searchService: SearchService) {}
 
   autoCompleteControl = new FormControl('');
-  autoCompleteData = this.autoCompleteControl.valueChanges.pipe(
+  autoCompleteData$ = this.autoCompleteControl.valueChanges.pipe(
     startWith(''),
     switchMap(value => {
       const searchString = typeof value === 'string' ? value : '';
