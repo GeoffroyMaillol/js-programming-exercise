@@ -8,6 +8,7 @@
   margin: 0 auto;
   padding: 2rem 1rem;
   transition: transform 0.4s ease;
+  min-height: 100vh;
 }
 
 .page.centered {
@@ -46,11 +47,14 @@ app-search-results {
   justify-content: center;
   border-radius: 9999px;
   position: fixed;
-  bottom: 24vh;
-  right: 40vh;
+  z-index: 1000;
+  position: fixed;
   width: 200px;
   height: 56px;
-  z-index: 1000;
+  bottom: clamp(80px, 24vh, 200px);
+  left: 50%;
+  transform: translateX(-50%);
+  transition: bottom 1s ease;
 }
 
 .add-btn:hover {
